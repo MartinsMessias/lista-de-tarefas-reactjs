@@ -18,7 +18,7 @@ export default class ClasseTarefas extends Component {
         if (novaTarefa != ''){
             const tarefas = [... this.state.tarefas, novaTarefa];  
             this.setState({
-                tarefas: tarefas
+                tarefas
             });
         }
     }
@@ -34,16 +34,20 @@ export default class ClasseTarefas extends Component {
    
 
     render() {
+
+        const {texto} = this.state.tarefaAtual;
+        const {tarefas} = this.state;
+
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit}>
                     <input 
                         type="text" 
-                        value={this.state.tarefaAtual.texto} 
+                        value={texto} 
                         onChange={this.handleChange} 
                     />
                     <button type="submit" >Adicionar</button>
-                    <h4>{JSON.stringify(this.state.tarefas)}</h4>
+                    <h4>{JSON.stringify(tarefas)}</h4>
                 </form>
             </div>
         )
