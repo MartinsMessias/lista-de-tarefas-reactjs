@@ -55,6 +55,19 @@ export default class ClasseTarefas extends Component {
     });
   };
 
+  updateTarefa = (texto, id) => {
+    const tarefas = this.state.tarefas;
+    tarefas.map((tarefa) => {
+      if (tarefa.id === id) {
+        tarefa.texto = texto;
+      }
+      return null;
+    });
+    this.setState({
+      tarefas,
+    });
+  };
+
   render() {
     const { texto } = this.state.tarefaAtual;
     const { tarefas } = this.state;
@@ -76,7 +89,11 @@ export default class ClasseTarefas extends Component {
             </InputGroupAddon>
           </InputGroup>
         </form>
-        <Tarefa tarefas={tarefas} deleteTarefa={this.deleteTarefa} />
+        <Tarefa
+          tarefas={tarefas}
+          deleteTarefa={this.deleteTarefa}
+          updateTarefa={this.updateTarefa}
+        />
       </div>
     );
   }
