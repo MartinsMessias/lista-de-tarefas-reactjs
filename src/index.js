@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import ListaTarefas from './components/ListaTarefas';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ListaTarefas />
   </React.StrictMode>,
   document.getElementById('root')
 );
