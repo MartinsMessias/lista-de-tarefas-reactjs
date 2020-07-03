@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Col } from "reactstrap";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaPencilAlt } from "react-icons/fa";
+import styled from "styled-components";
 
 const Tarefa = ({ tarefas, deleteTarefa }) => {
   const listaDasTarefas = tarefas.map((tarefa) => {
@@ -8,29 +9,15 @@ const Tarefa = ({ tarefas, deleteTarefa }) => {
       <div key={tarefa.id}>
         <Row>
           <Col>
-            <p
-              style={{
-                backgroundColor: "#cce5ff",
-                padding: "0.5rem",
-                borderRadius: ".24rem",
-                color: "#175393",
-                boxShadow: "rgba(0, 0, 0, 0.51) 0px 10px 10px",
-              }}
-            >
+            <p className="tarefa">
               {tarefa.texto}
-
               <span>
-                <button
-                  onClick={() => deleteTarefa(tarefa.id)}
-                  style={{
-                    float: "right",
-                    backgroundColor: "#cce5ff",
-                    color: "#175393",
-                    border: "none",
-                  }}
-                >
+                <IconButton onClick={() => deleteTarefa(tarefa.id)}>
                   <FaTrashAlt />
-                </button>
+                </IconButton>
+                <IconButton onClick={() => deleteTarefa(tarefa.id)}>
+                  <FaPencilAlt />
+                </IconButton>
               </span>
             </p>
           </Col>
@@ -40,5 +27,12 @@ const Tarefa = ({ tarefas, deleteTarefa }) => {
   });
   return <div>{listaDasTarefas}</div>;
 };
+
+const IconButton = styled.button`
+  float: right;
+  background-color: #cce5ff;
+  color: #175393;
+  border: none;
+`;
 
 export default Tarefa;
