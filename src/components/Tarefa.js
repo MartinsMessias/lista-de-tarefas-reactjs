@@ -1,11 +1,13 @@
 import React from 'react'
 
-const Tarefa = (props) => {
-    const tarefas = props.tarefas;
+const Tarefa = ({tarefas, deleteTarefa}) => {
     const listaDasTarefas = tarefas.map(tarefa => {
         return (
             <div key={tarefa.id}>
                 {tarefa.texto}
+                <span>
+                    <button onClick={() => deleteTarefa(tarefa.id)}>DEL</button>
+                </span>
             </div>
         )
     })

@@ -15,8 +15,8 @@ export default class ClasseTarefas extends Component {
     handleSubmit = e => {
         e.preventDefault();
         const novaTarefa = this.state.tarefaAtual;
-
-        if (novaTarefa !== ''){
+        console.log(typeof(novaTarefa));
+        if (novaTarefa.texto !== '' && novaTarefa.id !== ''){
             const tarefas = [... this.state.tarefas, novaTarefa];  
             this.setState({
                 tarefas,
@@ -25,6 +25,8 @@ export default class ClasseTarefas extends Component {
                     id: ''
                 }
             });
+        } else {
+            alert('Digite algo antes!')
         }
     }
 
@@ -37,7 +39,14 @@ export default class ClasseTarefas extends Component {
         });
     }
 
-   
+   deleteTarefa = id => {
+       const filteredTarefas = this.state.tarefas.filter(
+           tarefa => tarefa.id !== id
+       )
+       this.setState({
+           tarefas: filteredTarefas
+       })
+   }
 
     render() {
 
@@ -54,7 +63,7 @@ export default class ClasseTarefas extends Component {
                     />
                     <button type="submit" >Adicionar</button>
                 </form>
-                <Tarefa tarefas={tarefas} />
+                <Tarefa tarefas={tarefas} deleteTarefa={this.deleteTarefa}/>
             </div>
         )
     }
