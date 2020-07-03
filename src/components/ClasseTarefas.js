@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Tarefa from './Tarefa'
 
 export default class ClasseTarefas extends Component {
     constructor (props){
@@ -15,10 +16,14 @@ export default class ClasseTarefas extends Component {
         e.preventDefault();
         const novaTarefa = this.state.tarefaAtual;
 
-        if (novaTarefa != ''){
+        if (novaTarefa !== ''){
             const tarefas = [... this.state.tarefas, novaTarefa];  
             this.setState({
-                tarefas
+                tarefas,
+                tarefaAtual: {
+                    texto: '',
+                    id: ''
+                }
             });
         }
     }
@@ -26,7 +31,8 @@ export default class ClasseTarefas extends Component {
     handleChange = e => {
         this.setState({
             tarefaAtual: {
-                texto: e.target.value
+                texto: e.target.value,
+                id: Date.now()
             }
         });
     }
@@ -47,8 +53,8 @@ export default class ClasseTarefas extends Component {
                         onChange={this.handleChange} 
                     />
                     <button type="submit" >Adicionar</button>
-                    <h4>{JSON.stringify(tarefas)}</h4>
                 </form>
+                <Tarefa tarefas={tarefas} />
             </div>
         )
     }
