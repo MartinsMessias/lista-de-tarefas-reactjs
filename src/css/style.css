@@ -1,9 +1,9 @@
 .tarefa {
-  background-color: #cce5ff;
-  padding: 0.5rem;
-  border-radius: 0.24rem;
-  color: #175393;
-  box-shadow: rgba(0, 0, 0, 0.51) 0px 10px 10px;
+    background-color: #0065b7;
+    padding: 0.5rem;
+    border-radius: 0.24rem;
+    color: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.51) 0px 10px 10px;
 }
 
 .alerta {

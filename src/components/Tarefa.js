@@ -59,8 +59,8 @@ const Tarefa = ({ tarefas, deleteTarefa, updateTarefa }) => {
 
 const IconButton = styled.button`
   float: right;
-  background-color: #cce5ff;
-  color: #175393;
+  background-color: rgb(0, 101, 183);
+  color: #FFF;
   border: none;
 `;
 

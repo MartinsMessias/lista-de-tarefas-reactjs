@@ -96,12 +96,12 @@ export default class ClasseTarefas extends Component {
             </InputGroupAddon>
           </InputGroup>
         </form>
+        <Alerta isVisible={this.state.inputError} message="Digite um texo!" />
         <Tarefa
           tarefas={tarefas}
           deleteTarefa={this.deleteTarefa}
           updateTarefa={this.updateTarefa}
         />
-        <Alerta isVisible={this.state.inputError} message="Digite um texo!" />
       </div>
     );
   }
