@@ -33,7 +33,7 @@ const Tarefa = ({ tarefas, deleteTarefa, updateTarefa }) => {
             </p>
           </Col>
         </Row>
-        <Modal isOpen={modal} toggle={toggle} backdrop={false}>
+        <Modal isOpen={modal} toggle={toggle} backdrop={false} centered={true}>
           <ModalHeader toggle={toggle}>Editar tarefa</ModalHeader>
           <ModalBody>
             <Input

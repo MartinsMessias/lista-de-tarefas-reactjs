@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import Tarefa from "./Tarefa";
+import Alerta from "./Alerta";
+
 import {
   InputGroup,
   InputGroupText,
   InputGroupAddon,
   Input,
   Button,
+  Alert,
 } from "reactstrap";
 
 export default class ClasseTarefas extends Component {
@@ -17,13 +20,14 @@ export default class ClasseTarefas extends Component {
         texto: "",
         id: "",
       },
+      inputError: false,
     };
   }
   handleSubmit = (e) => {
     e.preventDefault();
     const novaTarefa = this.state.tarefaAtual;
     console.log(typeof novaTarefa);
-    if (novaTarefa.texto !== "" && novaTarefa.id !== "") {
+    if (novaTarefa.texto !== "") {
       const tarefas = [...this.state.tarefas, novaTarefa];
       this.setState({
         tarefas,
@@ -33,7 +37,9 @@ export default class ClasseTarefas extends Component {
         },
       });
     } else {
-      alert("Digite algo antes!");
+      this.setState({
+        inputError: true,
+      });
     }
   };
 
@@ -43,6 +49,7 @@ export default class ClasseTarefas extends Component {
         texto: e.target.value,
         id: Date.now(),
       },
+      inputError: false,
     });
   };
 
@@ -94,6 +101,7 @@ export default class ClasseTarefas extends Component {
           deleteTarefa={this.deleteTarefa}
           updateTarefa={this.updateTarefa}
         />
+        <Alerta isVisible={this.state.inputError} message="Digite um texo!" />
       </div>
     );
   }
