@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import Tarefa from "./Tarefa";
 import Alerta from "./Alerta";
+import firebase from './firebase'
 
 import {
   InputGroup,
-  InputGroupText,
   InputGroupAddon,
   Input,
   Button,
-  Alert,
 } from "reactstrap";
 
 export default class ClasseTarefas extends Component {
@@ -23,6 +22,17 @@ export default class ClasseTarefas extends Component {
       inputError: false,
     };
   }
+
+  componentDidMount() {
+    const fetchData = async () => {
+      const db = firebase.firestore()
+      const data = await db.collection('tarefas').get()
+      const tarefas = data.docs.map(doc => ({ ...doc.data(), id: doc.id }))
+      this.setState({tarefas})
+    }
+    fetchData()
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     const novaTarefa = this.state.tarefaAtual;
