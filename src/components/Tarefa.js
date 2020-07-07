@@ -11,12 +11,19 @@ import {
 import { FaTrashAlt, FaPencilAlt } from "react-icons/fa";
 import styled from "styled-components";
 import Alerta from "./Alerta";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Tarefa = ({ tarefas, deleteTarefa, updateTarefa }) => {
   const [modal, setModal] = useState(false);
   const [visible, setVisible] = useState(false);
   const toggle = () => setModal(!modal);
+  const [currentId, setCurrentId] = useState("");
+  const [currentText, setCurrentText] = useState("");
+
+  useEffect(() => {
+    updateTarefa(currentText, currentId);
+  }, [updateTarefa, currentId, currentText]);
+
   const listaDasTarefas = tarefas.map((tarefa) => {
     return (
       <div key={tarefa.id}>
@@ -28,7 +35,13 @@ const Tarefa = ({ tarefas, deleteTarefa, updateTarefa }) => {
                 <IconButton onClick={() => deleteTarefa(tarefa.id)}>
                   <FaTrashAlt />
                 </IconButton>
-                <IconButton onClick={toggle}>
+                <IconButton
+                  onClick={() => {
+                    setModal(true);
+                    setCurrentId(tarefa.id);
+                    setCurrentText(tarefa.texto);
+                  }}
+                >
                   <FaPencilAlt />
                 </IconButton>
               </span>
@@ -40,18 +53,18 @@ const Tarefa = ({ tarefas, deleteTarefa, updateTarefa }) => {
           <ModalBody>
             <Input
               type="text"
-              id={tarefa.id}
-              value={tarefa.texto}
+              value={currentText}
               onChange={(e) => {
                 if (e.target.value.length > 0) {
-                  updateTarefa(e.target.value, tarefa.id);
+                  setCurrentText(e.target.value);
+                  setCurrentId(currentId);
                   setVisible(false);
                 } else {
                   setVisible(true);
                 }
               }}
             />
-            <Alerta isVisible={visible} message="Não pode ser vázio!" />
+            <Alerta isVisible={visible} message="Não deixe vázio!" />
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={toggle}>
