@@ -77,6 +77,8 @@ export default class ClasseTarefas extends Component {
     tarefas.map((tarefa) => {
       if (tarefa.id === id) {
         tarefa.texto = texto;
+        const db = firebase.firestore()
+        db.collection('tarefas').doc(tarefa.id).set({texto})
       }
       return null;
     });
