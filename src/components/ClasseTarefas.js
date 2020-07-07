@@ -1,14 +1,9 @@
 import React, { Component } from "react";
 import Tarefa from "./Tarefa";
 import Alerta from "./Alerta";
-import firebase from './firebase'
+import firebase from "./firebase";
 
-import {
-  InputGroup,
-  InputGroupAddon,
-  Input,
-  Button,
-} from "reactstrap";
+import { InputGroup, InputGroupAddon, Input, Button } from "reactstrap";
 
 export default class ClasseTarefas extends Component {
   constructor(props) {
@@ -25,12 +20,12 @@ export default class ClasseTarefas extends Component {
 
   componentDidMount() {
     const fetchData = async () => {
-      const db = firebase.firestore()
-      const data = await db.collection('tarefas').get()
-      const tarefas = data.docs.map(doc => ({ ...doc.data(), id: doc.id }))
-      this.setState({tarefas})
-    }
-    fetchData()
+      const db = firebase.firestore();
+      const data = await db.collection("tarefas").get();
+      const tarefas = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      this.setState({ tarefas });
+    };
+    fetchData();
   }
 
   handleSubmit = (e) => {
@@ -39,6 +34,8 @@ export default class ClasseTarefas extends Component {
     console.log(typeof novaTarefa);
     if (novaTarefa.texto !== "") {
       const tarefas = [...this.state.tarefas, novaTarefa];
+      const db = firebase.firestore();
+      db.collection("tarefas").add({ texto: novaTarefa.texto });
       this.setState({
         tarefas,
         tarefaAtual: {
@@ -77,8 +74,8 @@ export default class ClasseTarefas extends Component {
     tarefas.map((tarefa) => {
       if (tarefa.id === id) {
         tarefa.texto = texto;
-        const db = firebase.firestore()
-        db.collection('tarefas').doc(tarefa.id).set({texto})
+        const db = firebase.firestore();
+        db.collection("tarefas").doc(tarefa.id).set({ texto });
       }
       return null;
     });
