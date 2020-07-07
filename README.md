@@ -1,1 +1,2 @@
-# lista-de-tarefas-reactjs
+# Lista de tarefas
+### React + Firebase
