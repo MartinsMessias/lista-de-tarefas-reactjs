@@ -67,6 +67,8 @@ export default class ClasseTarefas extends Component {
     this.setState({
       tarefas: filteredTarefas,
     });
+    const db = firebase.firestore();
+    db.collection("tarefas").doc(id).delete();
   };
 
   updateTarefa = (texto, id) => {
